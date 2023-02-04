@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "pm2 start server/index.mjs",
+    "start": "node server/index.mjs",
     "postinstall": "npm i --prefix=client && npm run build --prefix=client && rm -rf client",
     "dev": "nodemon server/index.mjs"
   },
