@@ -8,8 +8,8 @@ app.use(express.static("server/public"));
 app.use(express.json());
 app.use(cors());
 
-app.use("/api/bookings", MailRouter)
-app.use("/api", (req, res) => {
+app.post("/api/bookings", MailRouter)
+app.get("/api", (req, res) => {
     res.json({message: "Hello from the server!"});
 });
 
