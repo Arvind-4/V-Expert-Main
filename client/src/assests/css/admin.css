@@ -1,0 +1,13 @@
+.form-input {
+    padding: 0.4rem 0.6rem;
+    border-radius: 0.2rem;
+    border: 1px #031F60 solid;
+    outline: none;
+    background: transparent;
+}
+
+.form-input:focus {
+    outline: none;
+    background: transparent;
+    border: 1px #031F60 solid;
+}
