@@ -12,13 +12,13 @@ The project is a full stack MERN project.
 
 ## How to start
 
-`git clone https://github.com/Anubhav-Pathak/V-Expert.git` \
+`git clone https://github.com/Arvind-4/V-Expert-Main` \
 `npm install`
 
 ### For Front-End
 
 `cd client` \
 `npm start` \
-`npm run tailwind` \
+`npm run tailwind` 
 
 Note: Tailwind CSS file located in ___.src/assests/css/tailwind/output.css*___
