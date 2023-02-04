@@ -22,8 +22,6 @@ const Checkout = (props) => {
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
     const newData = { ...data, serviceList: serviceList, packageList: packageList };
-    console.log("newData", newData);
-    console.log("baseurl", baseUrl);
     const response = await fetch(`${baseUrl}/bookings`, {
       method: "POST",
       headers: {

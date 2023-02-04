@@ -11,10 +11,6 @@ const transporter = createTransport({
   });
 
 const mailSend = async (req, res) => {
-  console.log("email", email);
-  console.log("password", password);
-  console.log("mailHost", mailHost);
-  console.log("mailPort", mailPort);
 const body = req.body;
 const mail = {
     from: body.email,
