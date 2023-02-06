@@ -19,6 +19,6 @@ The project is a full stack MERN project.
 
 `cd client` \
 `npm start` \
-`npm run tailwind` 
+`npm run tailwind`
 
-Note: Tailwind CSS file located in ___.src/assests/css/tailwind/output.css*___
+Note: Tailwind CSS file located in **_.src/assests/css/tailwind/output.css_**
