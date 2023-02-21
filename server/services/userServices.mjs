@@ -1,80 +1,68 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { v4 as uuidv4 } from "uuid";
 
-import User from "../models/user.mjs";
-import logger from "../utils/logger.mjs";
-
-const findByEmailAndName = async (string) => {
-  try {
-    const res =
-      (await User.find({
-        name: string,
-      })) ||
-      (await User.find({
-        email: string,
-      }));
-    if (res) return res;
-    else {
-      logger.error("No record with this id");
-      return null;
-    }
-  } catch (e) {
-    logger.error(e);
-    return null;
-  }
-};
-
-const insert = async (body) => {
-  try {
-    console.log("body", body);
-    let password = body.password;
-    let hashedPassword = await bcrypt.hash(password, 8);
-    console.log("hashed password", hashedPassword);
-    const res = await User.create({
-      email: body.email,
-      password: hashedPassword,
-      name: body.name,
-    });
-    console.log("res", res);
-    if (res) return res;
-    else {
-      logger.error("Booking With Same ID already exist");
-      return null;
-    }
-  } catch (e) {
-    logger.error(e);
-    return null;
-  }
-};
+import { TOKEN_SECRET } from "../constants/index.mjs";
+import { db } from "../index.mjs";
 
 const generateAccessToken = async (email) => {
-  return jwt.sign(email, process.env.TOKEN_SECRET, { expiresIn: "86400s" });
+  return jwt.sign(email, TOKEN_SECRET, { expiresIn: "86400s" });
 };
 
-const signIn = async (body) => {
-  console.log("body", body);
+const findUser = async (id) => {
   try {
-    const user = await User.findOne({
-      email: body.email,
-    });
-    console.log("user", user);
+    const userCollection = await db.collection("users");
+    const { props } = await userCollection.get(id);
+    if (props) {
+      return props;
+    } else {
+      return null;
+    }
+  } catch (e) {
+    return null;
+  }
+};
+
+const generateTokenForUser = async (body) => {
+  try {
+    if (!body.email || !body.password) return null;
+    const usereCollection = await db.collection("users");
+    const { email, password } = body;
+    const { results } = await usereCollection.filter({ email });
+    const user = results[0].props;
     if (user) {
-      const validPassword = await bcrypt.compare(body.password, user.password);
+      const validPassword = await bcrypt.compare(password, user.password);
       if (validPassword) {
         const token = await generateAccessToken({ email: user.email });
         return token;
       } else {
-        logger.error("Invalid Password");
         return null;
       }
     } else {
-      logger.error("No User Found");
       return null;
     }
   } catch (e) {
-    logger.error(e);
     return null;
   }
 };
 
-export { signIn, findByEmailAndName, insert };
+const createUserService = async (body) => {
+  try {
+    const userCollection = await db.collection("users");
+    const { email, password } = body;
+    if (!email || !password) return null;
+    const userId = uuidv4();
+    let hashedPassword = await bcrypt.hash(password, 8);
+    const user = {
+      id: userId,
+      email: email,
+      password: hashedPassword,
+    };
+    await userCollection.set(userId, user);
+    return user;
+  } catch (e) {
+    return null;
+  }
+};
+
+export { createUserService, findUser, generateTokenForUser };

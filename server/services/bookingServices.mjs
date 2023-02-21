@@ -1,92 +1,143 @@
-import Booking from "../models/booking.mjs";
-import logger from "../utils/logger.mjs";
+import { db } from "../index.mjs";
+import { v4 as uuidv4 } from "uuid";
 
-const findAll = async (filter) => {
+const getAllBookingsService = async () => {
+  const bookingsCollection = await db.collection("bookings");
+  const { results } = await bookingsCollection.list();
+  const bookings = await Promise.all(
+    results.map(async ({ key }) => (await bookingsCollection.get(key)).props)
+  );
+  if (bookings) {
+    return bookings;
+  } else {
+    return null;
+  }
+};
+
+const createNewBookingService = async (body) => {
   try {
-    const res = await Booking.find(filter);
-    if (res) return res;
-    else {
-      logger.error("No records found");
+    const bookingCollection = await db.collection("bookings");
+    const {
+      name,
+      address,
+      phoneNumber,
+      serviceList,
+      packageList,
+      requirements,
+      email,
+      date,
+      time,
+      status,
+    } = body;
+    if (!name) {
       return null;
     }
+    const bookingId = uuidv4();
+    const booking = {
+      id: bookingId,
+      name,
+      address,
+      phoneNumber,
+      serviceList,
+      packageList,
+      requirements,
+      email,
+      date,
+      time,
+      status,
+    };
+    await bookingCollection.set(bookingId, booking);
+    return booking;
   } catch (e) {
-    logger.error(e);
+    console.log(e);
     return null;
   }
 };
 
-const findById = async (id) => {
-  try {
-    const res = await Booking.findById(id);
-    if (res) return res;
-    else {
-      logger.error("No record with this id");
-      return null;
-    }
-  } catch (e) {
-    logger.error(e);
-    return null;
+const updateBookingService = async (id, body) => {
+  const bookingCollection = await db.collection("bookings");
+  const { props } = await bookingCollection.get(id);
+  const boooking = {};
+  if (!props) return null;
+  const {
+    name,
+    address,
+    phoneNumber,
+    serviceList,
+    packageList,
+    requirements,
+    email,
+    date,
+    time,
+    status,
+  } = body;
+
+  boooking.id = id;
+
+  if (name) {
+    boooking.name = name;
+  } else {
+    boooking.name = props.name;
   }
+
+  if (address) {
+    boooking.address = address;
+  } else {
+    boooking.address = props.address;
+  }
+
+  if (phoneNumber) {
+    boooking.phoneNumber = phoneNumber;
+  } else {
+    boooking.phoneNumber = props.phoneNumber;
+  }
+
+  if (serviceList) {
+    boooking.serviceList = serviceList;
+  } else {
+    boooking.serviceList = props.serviceList;
+  }
+
+  if (packageList) {
+    boooking.packageList = packageList;
+  } else {
+    boooking.packageList = props.packageList;
+  }
+
+  if (requirements) {
+    boooking.requirements = requirements;
+  } else {
+    boooking.requirements = props.requirements;
+  }
+
+  if (email) {
+    boooking.email = email;
+  } else {
+    boooking.email = props.email;
+  }
+
+  if (date) {
+    boooking.date = date;
+  } else {
+    boooking.date = props.date;
+  }
+
+  if (time) {
+    boooking.time = time;
+  } else {
+    boooking.time = props.time;
+  }
+
+  if (status) {
+    boooking.status = status;
+  } else {
+    boooking.status = props.status;
+  }
+
+  await bookingCollection.delete(id);
+
+  await bookingCollection.set(id, boooking);
+  return boooking;
 };
 
-// Add service and package to booking
-// serviceList: [String],
-// packageList: [String],
-
-const insert = async (body) => {
-  try {
-    const res = await Booking.create({
-      address: body.address,
-      phoneNumber: body.phoneNumber,
-      email: body.email,
-      date: body.pdate,
-      time: body.ptime,
-      requirements: body.requirements,
-      name: body.name,
-      serviceList: body.serviceList,
-      packageList: body.packageList,
-    });
-    if (res) return res;
-    else {
-      logger.error("Booking With Same ID already exist");
-      return null;
-    }
-  } catch (e) {
-    logger.error(e);
-    return null;
-  }
-};
-
-const deleteRecord = async (id) => {
-  try {
-    const res = await Booking.findOneAndDelete(id);
-    if (res) {
-      logger.info("Record deleted");
-      return true;
-    } else {
-      logger.error("Booking With Same ID already exist");
-      return false;
-    }
-  } catch (e) {
-    logger.error(e);
-    return null;
-  }
-};
-
-const update = async (id, body) => {
-  try {
-    const res = await Booking.findOneAndUpdate({ _id: id }, body);
-    if (res) {
-      logger.info("Record updated");
-      return true;
-    } else {
-      logger.error("Booking With Same ID already exist");
-      return false;
-    }
-  } catch (e) {
-    logger.error(e);
-    return null;
-  }
-};
-
-export { findAll, findById, insert, deleteRecord, update };
+export { createNewBookingService, getAllBookingsService, updateBookingService };

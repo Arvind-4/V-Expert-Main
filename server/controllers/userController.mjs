@@ -1,66 +1,91 @@
 import logger from "../utils/logger.mjs";
 
 import {
-  insert,
-  findByEmailAndName,
-  signIn,
+  createUserService,
+  generateTokenForUser,
+  findUser,
 } from "../services/userServices.mjs";
 
-const getUser = async (req, res) => {
+const signUp = async (req, res) => {
   try {
-    const user = await findByEmailAndName(req.params.string);
+    const user = await createUserService(req.body);
+    console.log("user from controller", user);
+    if (user === null) {
+      res.status(424).json({
+        message: "Unable to Create User",
+        success: false,
+        data: null,
+      });
+    } else {
+      res.status(201).json({
+        data: user,
+        success: true,
+        message: "User Created",
+      });
+    }
+  } catch (e) {
+    logger.error(`Enable to call DB functions ${e}`);
+    res.status(500).json({
+      message: "Internal Server Error",
+      success: false,
+      data: null,
+    });
+  }
+};
+
+const getUser = async (req, res) => {
+  const { id } = req.params;
+  if (!id)
+    return res
+      .status(400)
+      .json({ message: "User Id Required", success: false, data: null });
+  try {
+    const user = await findUser(id);
     if (user)
       res.status(200).json({
-        user: user,
+        data: user,
+        success: true,
+        message: "User Found",
       });
     else
       res.status(404).json({
         message: "No User Found",
+        success: false,
+        data: null,
       });
   } catch (e) {
     logger.error(`Enable to call DB functions ${e}`);
     res.status(500).json({
       message: "Internal Server Error",
+      success: false,
+      data: null,
     });
   }
 };
 
-const createUser = async (req, res) => {
+const signIn = async (req, res) => {
   try {
-    const user = await insert(req.body);
-    if (user)
+    const token = await generateTokenForUser(req.body);
+    if (token)
       res.status(201).json({
-        user: user,
-      });
-    else
-      res.status(424).json({
-        message: "Unable to Create User",
-      });
-  } catch (e) {
-    logger.error(`Enable to call DB functions ${e}`);
-    res.status(500).json({
-      message: "Internal Server Error",
-    });
-  }
-};
-
-const signInUser = async (req, res) => {
-  try {
-    const user = await signIn(req.body);
-    if (user)
-      res.status(201).json({
-        token: user,
+        data: token,
+        success: true,
+        message: "Token Generated",
       });
     else
       res.status(424).json({
         message: "Wrong Credentials",
+        success: false,
+        data: null,
       });
   } catch (e) {
     logger.error(`Enable to call DB functions ${e}`);
     res.status(500).json({
       message: "Internal Server Error",
+      success: false,
+      data: null,
     });
   }
 };
 
-export { getUser, createUser, signInUser };
+export { signUp, getUser, signIn };

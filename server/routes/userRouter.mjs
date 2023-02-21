@@ -1,11 +1,10 @@
 import { Router } from "express";
-import { authenticateToken } from "../middleware/loginRequired.mjs";
-import { createUser, signInUser } from "../controllers/userController.mjs";
+import { signUp, getUser, signIn } from "../controllers/userController.mjs";
 
 const router = Router();
 
-router.route("/sign-up").post(authenticateToken, createUser);
-
-router.route("/sign-in").post(signInUser);
+router.post("/sign-up", signUp);
+router.get("/:id/get-user", getUser);
+router.post("/sign-in", signIn);
 
 export { router as UserRouter };

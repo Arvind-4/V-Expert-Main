@@ -9,12 +9,11 @@ import {
 
 const router = Router();
 
-router.route("/").get(getAllBookings).post(createBooking);
+router.get("/all", getAllBookings);
+router.post("/", createBooking);
 
-router
-  .route("/:id")
-  .get(getSingleBooking)
-  .patch(updateBooking)
-  .delete(deleteBooking);
+router.get("/:id/get-booking", getSingleBooking);
+router.patch("/:id/update-booking", updateBooking);
+router.delete("/:id/delete-booking", deleteBooking);
 
 export { router as BookingRouter };
