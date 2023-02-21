@@ -4,7 +4,7 @@
   "description": "V-Expert Backend",
   "private": true,
   "scripts": {
-    "start": "pm2-runtime server/index.mjs",
+    "start": "node server/index.mjs",
     "dev": "nodemon server/index.mjs",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss,md,mjs,html,cjs}\""
   },
