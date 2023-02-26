@@ -1,7 +1,7 @@
 import { bookingComplete } from "../api";
 
 export default ({
-  _id,
+  id,
   name,
   address,
   date,
@@ -14,9 +14,8 @@ export default ({
   setReload,
 }) => {
   const handleBooking = () => {
-    bookingComplete(_id)
+    bookingComplete(id)
       .then((res) => {
-        console.log("Booking Complete");
         setReload((prevState) => prevState * -1);
       })
       .catch((e) => {

@@ -11,19 +11,16 @@ export default () => {
     e.preventDefault();
     const entries = new FormData(e.target);
     const data = Object.fromEntries(entries);
-    console.log(data);
-    console.log("baseUrl", baseUrl);
-    const response = await fetch(`${baseUrl}/users/sign-in/`, {
+    const response = await fetch(`${baseUrl}/user/sign-in/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     });
-    const res = await response.json();
     if (response.status === 201) {
-      console.log("res", res);
-      const token = res.token;
+      const res = await response.json();
+      const token = res.data;
       localStorage.setItem("user", token);
       alert("User Signed In Successfully");
       navigate("/admin/panel");

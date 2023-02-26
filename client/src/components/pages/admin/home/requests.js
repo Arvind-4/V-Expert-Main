@@ -19,8 +19,8 @@ export default () => {
     setLoading(true);
     getBookings(status).then(
       (res) => {
-        console.log(res.data.bookings);
-        setBookings(res.data.bookings);
+        console.log(res);
+        setBookings(res.data);
         setLoading(false);
       },
       (err) => console.log(err)
