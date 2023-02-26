@@ -5,6 +5,8 @@ import {
   createNewBookingService,
   getAllBookingsService,
   updateBookingService,
+  getPendingBookingsService,
+  getCompletedBookingsService,
 } from "../services/bookingServices.mjs";
 
 const getAllBookings = async (req, res) => {
@@ -126,13 +128,11 @@ const updateBooking = async (req, res) => {
   try {
     const { id } = req.params;
     if (!id)
-      res
-        .status(400)
-        .json({
-          message: "Booking ID is required",
-          success: false,
-          data: null,
-        });
+      res.status(400).json({
+        message: "Booking ID is required",
+        success: false,
+        data: null,
+      });
     const booking = await updateBookingService(id, req.body);
     if (booking) {
       booking.id = id;
@@ -157,10 +157,62 @@ const updateBooking = async (req, res) => {
   }
 };
 
+const getPendingBookings = async (req, res) => {
+  try {
+    const allBookings = await getPendingBookingsService();
+    if (allBookings)
+      res.status(200).json({
+        success: true,
+        message: "Bookings fetched",
+        data: allBookings,
+      });
+    else
+      res.status(404).json({
+        success: false,
+        message: "No Bookings found",
+        data: null,
+      });
+  } catch (e) {
+    logger.error(`Enable to call DB functions ${e}`);
+    res.status(500).json({
+      message: "Internal Server Error",
+      success: false,
+      data: null,
+    });
+  }
+};
+
+const getCompletedBookings = async (req, res) => {
+  try {
+    const allBookings = await getCompletedBookingsService();
+    if (allBookings)
+      res.status(200).json({
+        success: true,
+        message: "Bookings fetched",
+        data: allBookings,
+      });
+    else
+      res.status(404).json({
+        success: false,
+        message: "No Bookings found",
+        data: null,
+      });
+  } catch (e) {
+    logger.error(`Enable to call DB functions ${e}`);
+    res.status(500).json({
+      message: "Internal Server Error",
+      success: false,
+      data: null,
+    });
+  }
+};
+
 export {
   getAllBookings,
   getSingleBooking,
   createBooking,
   deleteBooking,
   updateBooking,
+  getPendingBookings,
+  getCompletedBookings,
 };

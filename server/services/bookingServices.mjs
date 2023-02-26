@@ -140,4 +140,42 @@ const updateBookingService = async (id, body) => {
   return boooking;
 };
 
-export { createNewBookingService, getAllBookingsService, updateBookingService };
+const getPendingBookingsService = async () => {
+  const bookingsCollection = await db.collection("bookings");
+  const { results } = await bookingsCollection.list();
+  const bookings = await Promise.all(
+    results.map(async ({ key }) => (await bookingsCollection.get(key)).props)
+  );
+  if (bookings) {
+    const pendingBookings = bookings.filter(
+      (booking) => booking.status === "pending"
+    );
+    return pendingBookings;
+  } else {
+    return null;
+  }
+};
+
+const getCompletedBookingsService = async () => {
+  const bookingsCollection = await db.collection("bookings");
+  const { results } = await bookingsCollection.list();
+  const bookings = await Promise.all(
+    results.map(async ({ key }) => (await bookingsCollection.get(key)).props)
+  );
+  if (bookings) {
+    const completedBookings = bookings.filter(
+      (booking) => booking.status === "completed"
+    );
+    return completedBookings;
+  } else {
+    return null;
+  }
+};
+
+export {
+  createNewBookingService,
+  getAllBookingsService,
+  updateBookingService,
+  getPendingBookingsService,
+  getCompletedBookingsService,
+};
