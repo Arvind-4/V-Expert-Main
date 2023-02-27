@@ -49,12 +49,23 @@ const generateTokenForUser = async (body) => {
 const createUserService = async (body) => {
   try {
     const userCollection = await db.collection("users");
-    const { email, password } = body;
+    const { email, password, name } = body;
     if (!email || !password) return null;
+
+
+    const emailProps = await userCollection.filter({ email });
+    if (emailProps.results.length > 0) return null;
+
+
+    const nameProps = await userCollection.filter({ name });
+    if (nameProps.results.length > 0) return null;
+
+
     const userId = uuidv4();
     let hashedPassword = await bcrypt.hash(password, 8);
     const user = {
       id: userId,
+      name: name,
       email: email,
       password: hashedPassword,
     };

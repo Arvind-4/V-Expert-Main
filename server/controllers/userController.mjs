@@ -9,7 +9,6 @@ import {
 const signUp = async (req, res) => {
   try {
     const user = await createUserService(req.body);
-    console.log("user from controller", user);
     if (user === null) {
       res.status(424).json({
         message: "Unable to Create User",
