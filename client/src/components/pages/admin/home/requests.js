@@ -19,7 +19,6 @@ export default () => {
     setLoading(true);
     getBookings(status).then(
       (res) => {
-        console.log(res);
         setBookings(res.data);
         setLoading(false);
       },
@@ -57,18 +56,17 @@ export default () => {
         className={"container mx-auto grid gap-8 lg:grid-cols-2 md:grid-cols-1"}
       >
         {loading ? (
-          <></>
-        ) : (
-          bookings.map((item) => {
-            return <RequestCard {...item} setReload={setReload} />;
-          })
+          <>Loading ...</>
+        ) : ( 
+          bookings.length > 0 ? bookings.map((item) => {
+             return <RequestCard {...item} setReload={setReload} />;
+          }) : (<p>
+            No Bookings
+          </p>
+          )
         )}
+         
 
-        {/*<RequestCard />*/}
-        {/*<RequestCard />*/}
-        {/*<RequestCard />*/}
-        {/*<RequestCard />*/}
-        {/*<RequestCard />*/}
       </div>
     </>
   );

@@ -52,7 +52,6 @@ export default () => {
     });
     setResults(match);
     if (!match.length) setHeading("No service found");
-    console.log(results);
     setLoading(false);
   };
 

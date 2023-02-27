@@ -10,19 +10,16 @@ export default () => {
     e.preventDefault();
     const entries = new FormData(e.target);
     const data = Object.fromEntries(entries);
-    console.log(data);
-    console.log("baseUrl", baseUrl);
-    const response = await fetch(`${baseUrl}/users/sign-up/`, {
+    const response = await fetch(`${baseUrl}/user/sign-up/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     });
-    const res = await response.json();
     if (response.status === 201) {
       alert("User Created Successfully");
-      navigate("/admin/sign-in");
+      navigate("/admin/login");
     }
   };
 

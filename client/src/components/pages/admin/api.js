@@ -52,7 +52,6 @@ const bookingComplete = async (id) => {
     },
     body: JSON.stringify({ status: "completed" }),
   });
-  console.log("response.status", response.status);
   if (response.status === 200) {
     alert("Booking Completed");
     return true;
