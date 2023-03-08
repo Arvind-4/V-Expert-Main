@@ -4,6 +4,7 @@ import {
   createUserService,
   generateTokenForUser,
   findUser,
+  verifyToken,
 } from "../services/userServices.mjs";
 
 const signUp = async (req, res) => {
@@ -87,4 +88,35 @@ const signIn = async (req, res) => {
   }
 };
 
-export { signUp, getUser, signIn };
+const checkToken = async (req, res) => {
+  try {
+    const authHeader = req.headers["authorization"];
+    const token = authHeader && authHeader.split(" ")[1];
+    if (!token)
+      return res
+        .status(400)
+        .json({ message: "Token Required", success: false, data: null });
+    const user = await verifyToken(token);
+    if (user)
+      res.status(200).json({
+        data: user,
+        success: true,
+        message: "Token Valid",
+      });
+    else
+      res.status(401).json({
+        message: "Token Invalid",
+        success: false,
+        data: null,
+      });
+  } catch (e) {
+    logger.error(`Enable to call DB functions ${e}`);
+    res.status(500).json({
+      message: "Internal Server Error",
+      success: false,
+      data: null,
+    });
+  }
+};
+
+export { signUp, getUser, signIn, checkToken };

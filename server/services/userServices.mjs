@@ -52,14 +52,11 @@ const createUserService = async (body) => {
     const { email, password, name } = body;
     if (!email || !password) return null;
 
-
     const emailProps = await userCollection.filter({ email });
     if (emailProps.results.length > 0) return null;
 
-
     const nameProps = await userCollection.filter({ name });
     if (nameProps.results.length > 0) return null;
-
 
     const userId = uuidv4();
     let hashedPassword = await bcrypt.hash(password, 8);
@@ -76,4 +73,12 @@ const createUserService = async (body) => {
   }
 };
 
-export { createUserService, findUser, generateTokenForUser };
+const verifyToken = async (token) => {
+  try {
+    const decoded = jwt.verify(token, TOKEN_SECRET);
+    return decoded;
+  } catch (e) {
+    return null;
+  }
+};
+export { createUserService, findUser, generateTokenForUser, verifyToken };
