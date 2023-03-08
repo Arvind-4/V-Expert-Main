@@ -16,6 +16,22 @@ async function fetchPending() {
   }
 }
 
+async function checkToken(token) {
+  if (!token) return false;
+  const response = await fetch(`${baseUrl}/user/check-token`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    },
+  });
+  if (response.status === 200) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 async function fetchCompleted() {
   const response = await fetch(`${baseUrl}/book/completed`, {
     method: "GET",
@@ -27,16 +43,14 @@ async function fetchCompleted() {
   if (response.status === 200) {
     const res = await response.json();
     return res;
-  } else {
-    return null;
-  }
+  } else return null;
 }
 
 const getBookings = async (status) => {
   if (status === "pending") {
     return await fetchPending();
   }
-  if (status === "complete") {
+  if (status === "completed") {
     return await fetchCompleted();
   } else {
     return null;
@@ -60,4 +74,4 @@ const bookingComplete = async (id) => {
   }
 };
 
-export { getBookings, bookingComplete };
+export { getBookings, bookingComplete, checkToken };

@@ -1,8 +1,8 @@
-// import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import React from "react";
-import "../../../assests/css/tailwind/output.css";
 import "../../../assests/css/header.css";
-import Navbar from "./navbar";
+import "../../../assests/css/tailwind/output.css";
+import Navbar from "./Navbar";
 const Header = () => {
   return (
     <>

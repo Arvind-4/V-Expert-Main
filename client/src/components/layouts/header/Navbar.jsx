@@ -1,8 +1,8 @@
 import React from "react";
 import logo from "../../../assests/images/img.png";
-import Dropdown from "./dropdown";
-import { services, packages } from "../../../data/data.js";
-import SearchResults, { toggleModal } from "./searchResults";
+import Dropdown from "./Dropdown";
+import { services, packages } from "../../../data/data";
+import SearchResults, { toggleModal } from "./SearchResults";
 const Navbar = () => {
   const [header, setHeader] = React.useState(true);
   const toggleHeader = () => {

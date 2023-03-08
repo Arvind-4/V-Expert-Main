@@ -1,6 +1,6 @@
 import React from "react";
 import footerLogo from "../../../assests/images/Footer-Logo.png";
-import { services, packages } from "../../../data/data.js";
+import { services, packages } from "../../../data/data";
 const FooterLink = (props) => {
   return (
     <li>

@@ -1,4 +1,4 @@
-import RegisterForm from "./registerForm";
+import RegisterForm from "./RegisterForm";
 import "../../../../assests/css/admin.css";
 
 export default () => {

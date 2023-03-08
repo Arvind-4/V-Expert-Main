@@ -1,7 +1,7 @@
 import React from "react";
 import { baseUrl } from "../../constants";
 import logo from "../../assests/images/Footer-Logo.png";
-import Tabs from "./tabs";
+import Tabs from "./Tabs";
 
 let packageList = [];
 let serviceList = [];

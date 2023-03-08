@@ -1,4 +1,4 @@
-import LoginForm from "./loginForm";
+import LoginForm from "./LoginForm";
 import "../../../../assests/css/admin.css";
 
 export default () => {

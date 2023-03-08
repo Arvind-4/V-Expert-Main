@@ -1,11 +1,11 @@
 import "../../../assests/css/home.css";
-import Hero from "./hero";
-import Stats from "./stats";
-import Package from "./package";
-import About from "./about";
-import Service from "./service";
-import Whatsapp from "../../layouts/whatsapp";
-import Testimony from "../../layouts/testimony";
+import Hero from "./Hero";
+import Stats from "./Stats";
+import Package from "./Package";
+import About from "./About";
+import Service from "./Service";
+import Whatsapp from "../../layouts/Whatsapp";
+import Testimony from "../../layouts/Testimony";
 
 const Home = () => {
   return (

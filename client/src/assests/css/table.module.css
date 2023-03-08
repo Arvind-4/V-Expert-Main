@@ -1,0 +1,15 @@
+.Table {
+  margin: 0 auto;
+}
+.Table tbody tr:hover {
+  background-color: #eee;
+}
+.Table th {
+  white-space: nowrap;
+  padding: 2px 8px;
+  text-align: left;
+}
+.Table td {
+  padding: 2px 8px;
+  overflow-wrap: break-word;
+}

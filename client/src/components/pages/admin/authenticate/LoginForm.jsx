@@ -11,7 +11,7 @@ export default () => {
     e.preventDefault();
     const entries = new FormData(e.target);
     const data = Object.fromEntries(entries);
-    const response = await fetch(`${baseUrl}/user/sign-in/`, {
+    const response = await fetch(`${baseUrl}/user/sign-in`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -1,25 +1,48 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { packages } from "../../../data/data";
-import About from "./about";
-import Details from "./details";
-import Testimony from "../../layouts/testimony";
-import Tabs from "../../layouts/tabs";
+import { services } from "../../../data/data";
+import "../../../assests/css/services.css";
+import About from "./About";
+import Details from "./Details";
+import Tabs from "../../layouts/Tabs";
+import Whatsapp from "../../layouts/Whatsapp";
+import V1 from "../../../assests/images/V1.svg";
+import V2 from "../../../assests/images/V2.svg";
+import V4 from "../../../assests/images/V4.svg";
+import Testimony from "../../layouts/Testimony";
 
-const Packages = () => {
-  let { name } = useParams();
-  let packageType = packages.find((type) => type.path === name);
+const Service = () => {
+  const { name } = useParams();
+  const Service = services.find((s) => s.path === name);
 
   return (
-    <main className="pb-12 bg-gray">
-      <section className="bg-blue flex items-center justify-center">
-        <div className="max-w-[1400px] mx-auto p-4 text-center text-white">
-          <h3 className="text-md">Annual Contract Package</h3>
-          <h1 className="text-5xl sm:text-6xl mb-4">{packageType.name}</h1>
-        </div>
+    <main className="bg-gray pb-12">
+      <About service={Service} />
+      <section className="bg-white flex items-center justify-evenly flex-wrap-reverse gap-8 shadow-lg shadow-black mx-4 p-4 xl:mx-auto max-w-[1400px]">
+        <article>
+          <img
+            src={Service.img}
+            alt={Service.name}
+            width="600px"
+            className="service-img p-4 border-8 border-blue"
+          />
+          <ul className="flex flex-col gap-6 mt-8 text-xl">
+            <li className="flex items-center">
+              <img src={V1} alt="24-hours" width={"30px"} className="mr-2" />
+              24-hour Customer Services available
+            </li>
+            <li className="flex items-center">
+              <img src={V2} alt="24-hours" width={"30px"} className="mr-2" />
+              Response time of less than 4 hours
+            </li>
+            <li className="flex items-center">
+              <img src={V4} alt="24-hours" width={"30px"} className="mr-2" />
+              100% Customer Satisfaction
+            </li>
+          </ul>
+        </article>
+        <Details service={Service} />
       </section>
-      <About packageType={packageType} />
-      <Details packageType={packageType} />
       <Testimony />
       <section className="text-md p-4 text-blue mt-12 bg-white border-2 border-blue rounded-md mx-4 xl:mx-auto max-w-[1400px]">
         <h2 className="text-3xl mb-8">Terms and Condtions of Purchase</h2>
@@ -74,8 +97,8 @@ const Packages = () => {
           specified /mentioned in advance of the services being carried out.
         </p>
       </section>
+      <Whatsapp />
     </main>
   );
 };
-
-export default Packages;
+export default Service;
