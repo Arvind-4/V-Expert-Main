@@ -37,7 +37,7 @@ const Bookings = (props) => {
           <td className="text-center">
             <button
               onClick={() => viewClickHandler(booking.id)}
-              className="w-full py-1 px-2 my-1 bg-gray-700 text-white rounded"
+              className="w-full py-1 px-2 my-1 bg-blue text-white rounded"
             >
               View
             </button>
@@ -45,16 +45,16 @@ const Bookings = (props) => {
           <td className="text-center">
             <button
               className={`w-full py-1 px-2 my-1 ${
-                booking.status === "completed" ? "bg-green-400" : ""
+                booking.status === "completed" ? "bg-green" : ""
               } 
                                 ${
-                                  booking.status === "canclled"
-                                    ? "bg-red-400"
+                                  booking.status === "cancelled"
+                                    ? "bg-red"
                                     : ""
                                 } 
                                 ${
                                   booking.status === "pending"
-                                    ? "bg-gray-400"
+                                    ? "bg-gray"
                                     : ""
                                 }
                                 text-white rounded

@@ -5,7 +5,7 @@ const Filters = (props) => {
     props.filter(event.target.value);
   };
   return (
-    <div className="bg-gray-400 text-white rounded py-1 px-2">
+    <div className="bg-blue text-white rounded py-1 px-2">
       <label htmlFor="status">{props.label}&nbsp;-</label>
       <select
         id="status"
