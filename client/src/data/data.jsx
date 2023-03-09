@@ -11,7 +11,7 @@ import carpentry from "../assests/images/services/Carpentry.jpg";
 import wallpaper from "../assests/images/services/Wallpaper.jpg";
 import handyman from "../assests/images/services/Handyman.jpg";
 import first from "../assests/images/packages/First.jpg";
-import buisness from "../assests/images/packages/Business.jpg";
+import business from "../assests/images/packages/Business.jpg";
 import economy from "../assests/images/packages/Economy.jpg";
 
 export const services = [
@@ -301,9 +301,9 @@ export const packages = [
     },
   },
   {
-    path: "buisness",
-    img: buisness,
-    name: "Buisness",
+    path: "business",
+    img: business,
+    name: "Business",
     price: 2099,
     pm: 2,
     rsc: 8,
