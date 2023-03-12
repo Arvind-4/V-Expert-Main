@@ -7,7 +7,7 @@ const Details = ({ service }) => {
     navigate("/cart");
   };
   return (
-    <section className="text-md p-4 text-blue bg-white mx-4 xl:mx-auto max-w-[600px]">
+    <section className="text-md mb-32 p-4 text-blue bg-white mx-4 xl:mx-auto max-w-[600px]">
       <p className={"text-lg mb-8"}>
         {" "}
         Base Price:{" "}

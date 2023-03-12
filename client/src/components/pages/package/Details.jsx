@@ -3,7 +3,7 @@ import { packageDetails } from "../../../data/data";
 
 const Details = ({ packageType }) => {
   return (
-    <section className="text-md p-4 text-blue mt-12 bg-white border-2 border-blue rounded-md mx-4 xl:mx-auto max-w-[1400px]">
+    <section className="text-md mb-32 p-4 text-blue mt-12 bg-white border-2 border-blue rounded-md mx-4 xl:mx-auto max-w-[1400px]">
       <h2 className="text-3xl mb-8">Package Details</h2>
       <h3 className="text-xl mb-4 font-bold">
         {" "}
