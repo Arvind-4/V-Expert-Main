@@ -1,5 +1,6 @@
 import React from 'react'
 import Rating from "@mui/material/Rating";
+import { baseUrl } from "../../constants/index";
 import "../../assests/css/home.css";
 
 const TestimonyForm = () => {
@@ -18,9 +19,24 @@ const TestimonyForm = () => {
     setDescription(event.target.value)
   }
 
-  const submitHandler = (event) => {
+  async function submitHandler(event) {
     event.preventDefault();
-    console.log({name: name, rating: rating, review: description});
+    const data = {name: name, ratingScore: rating, review: description}
+    const response = await fetch(`${baseUrl}/rating/create-rating`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    if (response.status === 201) {
+      alert("Thank you for your feedback!");
+      setName("");
+      setRating(0);
+      setDescription("");          
+    } else {
+      alert("Something went wrong. Please try again later.");
+    }
   }
 
   return (
