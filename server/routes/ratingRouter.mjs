@@ -1,7 +1,7 @@
 import { Router } from "express";
 import {
-    createRating,
-    getAllRatings
+  createRating,
+  getAllRatings,
 } from "../controllers/ratingController.mjs";
 import { loginRequired } from "../middleware/loginRequired.mjs";
 
