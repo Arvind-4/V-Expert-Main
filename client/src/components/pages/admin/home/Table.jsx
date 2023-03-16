@@ -48,15 +48,9 @@ const Bookings = (props) => {
                 booking.status === "completed" ? "bg-green" : ""
               } 
                                 ${
-                                  booking.status === "cancelled"
-                                    ? "bg-red"
-                                    : ""
+                                  booking.status === "cancelled" ? "bg-red" : ""
                                 } 
-                                ${
-                                  booking.status === "pending"
-                                    ? "bg-gray"
-                                    : ""
-                                }
+                                ${booking.status === "pending" ? "bg-gray" : ""}
                                 text-white rounded
                             `}
             >

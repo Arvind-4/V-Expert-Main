@@ -6,4 +6,7 @@ if (process.env.NODE_ENV === "production") {
   baseUrl = "http://localhost:8000/api";
 }
 
-export { baseUrl };
+const fileName = "data";
+const fileExtension = "csv";
+
+export { baseUrl, fileName, fileExtension };

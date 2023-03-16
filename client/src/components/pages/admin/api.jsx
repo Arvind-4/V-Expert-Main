@@ -74,4 +74,20 @@ const bookingComplete = async (id) => {
   }
 };
 
-export { getBookings, bookingComplete, checkToken };
+async function downloadData() {
+  const response = await fetch(`${baseUrl}/backup/download-data`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + localStorage.getItem("user"),
+    },
+  });
+  if (response.status === 200) {
+    const res = await response.json();
+    return res.data;
+  } else {
+    return null;
+  }
+}
+
+export { getBookings, bookingComplete, checkToken, downloadData };

@@ -53,7 +53,6 @@ const Testimony = () => {
           <></>
         )}
       </article>
-      
     </section>
   );
 };

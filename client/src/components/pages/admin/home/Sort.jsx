@@ -1,4 +1,5 @@
 import React from "react";
+import { exportToCsv } from "../csv";
 import Filters from "./Filters";
 
 // let dates = [];
@@ -23,6 +24,7 @@ const Sort = (props) => {
         label="status"
         options={["pending", "completed"]}
       />
+      <button onClick={exportToCsv}>Download Booking Data CSV</button>
       {/* <Filters filter={filterDate} label="Date" options={dates} /> */}
     </div>
   );
