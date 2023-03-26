@@ -6,7 +6,7 @@ const Filters = (props) => {
   };
 
   return (
-    <div className="bg-gray-400 text-white rounded py-1 px-2">
+    <div className="bg-gray text-black rounded py-1 px-2">
       <label htmlFor="status">{props.label}&nbsp;-</label>
       <select
         id="status"
