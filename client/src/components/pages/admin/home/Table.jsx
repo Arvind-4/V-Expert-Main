@@ -1,15 +1,8 @@
 import React, { useContext } from "react";
-
-// import "../Assets/CSS/output.css";
-// import "../../../../assests/css/admin/table.css"
 import "../../../../assests/css/table.module.css";
-// import "../../../../assests/css/admin/table.css"
 import styles from "../../../../assests/css/table.module.css";
-// import styles from "../Assets/CSS/table.module.css"
-// import Modal from '../UI/Modal';
 import Modal from "./Modal";
 import { createPortal } from "react-dom";
-// import BookingContext from '../Store/BookingContext';
 import BookingContext from "../../../../store/BookingContext";
 
 const Bookings = (props) => {
@@ -63,25 +56,12 @@ const Bookings = (props) => {
               <select
                 id="status"
                 onChange={(event) => onChangeHandler(booking.id, event)}
-                className={`
-                                    w-[120px] py-1 px-2 my-1 
-                                    ${
-                                      booking.status === "completed"
-                                        ? "bg-green"
-                                        : ""
-                                    } 
-                                    ${
-                                      booking.status === "cancelled"
-                                        ? "bg-red"
-                                        : ""
-                                    } 
-                                    ${
-                                      booking.status === "pending"
-                                        ? "bg-gray"
-                                        : ""
-                                    }
-                                    text-black rounded focus:outline-none
-                                `}
+                className={`w-[120px] py-1 px-2 my-1 
+                  ${booking.status === "completed" ? "bg-green" : ""} 
+                  ${booking.status === "cancelled" ? "bg-red" : ""} 
+                  ${booking.status === "pending" ? "bg-gray" : ""}
+                  text-black rounded focus:outline-none
+              `}
               >
                 <option key={0} value={booking.status}>
                   {booking.status}
@@ -98,11 +78,11 @@ const Bookings = (props) => {
               </select>
             </td>
             <td className="text-center">
-              {booking.status !== "pending" && (
+              {booking.status !== "pending" ? (
                 <button onClick={() => deleteClickHandler(booking.id)}>
                   <i className="fa-solid fa-trash"></i>
                 </button>
-              )}
+              ) : null}
             </td>
           </tr>
         );
@@ -113,6 +93,7 @@ const Bookings = (props) => {
 
 const Table = () => {
   const bookingContext = useContext(BookingContext);
+  console.log("Table", bookingContext.items);
   return (
     <div className="mx-auto max-w-full rounded overflow-x-scroll Scroll">
       {bookingContext.items && bookingContext.items.length > 0 ? (
@@ -134,9 +115,7 @@ const Table = () => {
           {bookingContext.items ? (
             <Bookings bookings={bookingContext.items} />
           ) : (
-            <h1 className="text-2xl mt-4">
-                No Bookings Available !
-            </h1>
+            <h1 className="text-2xl mt-4">No Bookings Available !</h1>
           )}
         </table>
       ) : (

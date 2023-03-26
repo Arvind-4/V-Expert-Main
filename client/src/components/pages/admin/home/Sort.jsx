@@ -1,19 +1,17 @@
 import React, { useContext } from "react";
-// import Filters from '../UI/Filters'
 import Filters from "./Filters";
-// import BookingContext from '../Store/BookingContext';
 import BookingContext from "../../../../store/BookingContext";
-import { getBookings } from "../api";
+import { fetchAll } from "../api";
 
-const BookingResponse = await getBookings("pending");
+const BookingResponse = await fetchAll();
 const Bookings = BookingResponse.data;
 
 let dates = [];
 Bookings.forEach((booking) => {
   dates.push(booking.date);
-  dates = dates.filter((value, index, array) => {
-    return array.indexOf(value) === index;
-  });
+  // dates = dates.filter((value, index, array) => {
+  //   return array.indexOf(value) === index;
+  // });
 });
 export default function Sort() {
   const bookingContext = useContext(BookingContext);

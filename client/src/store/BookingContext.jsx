@@ -1,10 +1,12 @@
 import React, { createContext, useReducer } from "react";
-import { getBookings } from "../components/pages/admin/api";
+import {
+  deleteBooking,
+  changeStatus,
+  fetchAll,
+} from "../components/pages/admin/api";
 
-const bookingsResponse = await getBookings("pending");
-const bookings = bookingsResponse.data;
-
-console.log("bookings from context: ", bookings);
+let res = await fetchAll();
+let bookings = res.data;
 
 export function ConvertDate(date) {
   var dd = date.getDate();
@@ -15,11 +17,19 @@ export function ConvertDate(date) {
   return date;
 }
 
-function filterBookings(array, status, date) {
-  console.log(status, date);
-  return array.filter(
-    (value) => value.date === date && value.status === status
+function filterBookingOnState(status) {
+  let filteredArray = bookings.filter(
+    (value) => value.status === status
   );
+  console.log("filteredArray", filteredArray)
+  return filteredArray;
+}
+
+function filterBookingOnDate(date) {
+  let filteredArray = bookings.filter(
+    (value) => value.date === date
+  );
+  return filteredArray;
 }
 
 const BookingContext = createContext({
@@ -32,25 +42,28 @@ const BookingContext = createContext({
 });
 
 const defaultBooking = {
-  items: [...bookings],
+  items: [bookings.filter((value) => value.status === "pending")],
   filter: { status: "pending", date: ConvertDate(new Date()) },
 };
 
-function bookingReducer(state, action) {
+async function bookingReducer(state, action) {
   if (action.type === "REMOVE_BOOKING") {
-    // Do POST request for deleting the booking
+    return await deleteBooking(action.id);
   } else if (action.type === "FILTER_DATE") {
     return {
-      items: filterBookings(bookings, state.filter.status, action.date),
+      items: filterBookingOnDate(action.date),
       filter: { ...state.filter, date: action.date },
     };
   } else if (action.type === "FILTER_STATUS") {
     return {
-      items: filterBookings(bookings, action.status, state.filter.date),
-      filter: { ...state.filter, status: action.status },
+      items: filterBookingOnState(action.status),
+      filter: { ...state.filter, date: action.date },
     };
   } else if (action.type === "CHANGE_STATUS") {
-    // Do POST request for changing status of the booking
+    await changeStatus(action.id, action.status);
+    return {
+      items: [bookings.filter((value) => value.status === action.status)],
+    };
   }
 }
 
@@ -59,7 +72,6 @@ export const BookingProvider = (props) => {
     bookingReducer,
     defaultBooking
   );
-  console.log("bookingState: ", bookingState.items);
   const bookingContext = {
     items: bookingState.items,
     filter: bookingState.filter,
@@ -77,3 +89,4 @@ export const BookingProvider = (props) => {
 };
 
 export default BookingContext;
+
