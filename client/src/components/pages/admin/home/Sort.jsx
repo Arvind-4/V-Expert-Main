@@ -1,33 +1,38 @@
-import React from "react";
-import { exportToCsv } from "../csv";
+import React, { useContext } from "react";
+// import Filters from '../UI/Filters'
 import Filters from "./Filters";
+// import BookingContext from '../Store/BookingContext';
+import BookingContext from "../../../../store/BookingContext";
+import { getBookings } from "../api";
 
-// let dates = [];
-// Bookings.forEach((booking) => {
-//   dates.push(booking.date);
-//   dates = dates.filter((value, index, array) => {
-//     return array.indexOf(value) === index;
-//   });
-// });
-const Sort = (props) => {
-  const filterStatus = (value) => {
-    props.status(value);
+const BookingResponse = await getBookings("pending");
+const Bookings = BookingResponse.data;
+
+let dates = [];
+Bookings.forEach((booking) => {
+  dates.push(booking.date);
+  dates = dates.filter((value, index, array) => {
+    return array.indexOf(value) === index;
+  });
+});
+export default function Sort() {
+  const bookingContext = useContext(BookingContext);
+
+  const filterStatusHandler = (value) => {
+    bookingContext.filterStatus(value);
   };
-  // const filterDate = (value) => {
-  //   props.date(value);
-  // };
+  const filterDateHandler = (value) => {
+    bookingContext.filterDate(value);
+  };
 
   return (
     <div className="flex gap-4 flex-wrap">
       <Filters
-        filter={filterStatus}
-        label="status"
-        options={["pending", "completed"]}
+        filter={filterStatusHandler}
+        label="Status"
+        options={["pending", "completed", "cancelled"]}
       />
-      <button onClick={exportToCsv}>Download Booking Data CSV</button>
-      {/* <Filters filter={filterDate} label="Date" options={dates} /> */}
+      <Filters filter={filterDateHandler} label="Date" options={dates} />
     </div>
   );
-};
-
-export default Sort;
+}

@@ -4,17 +4,12 @@ import Sort from "./Sort";
 
 import { useNavigate } from "react-router-dom";
 import { getBookings, checkToken } from "../api";
+import { ConvertDate } from "../../../../store/BookingContext";
 
-function ConvertDate(date) {
-  var dd = date.getDate();
-  var mm = date.getMonth() + 1;
-  var yyyy = date.getFullYear();
-  date =
-    (dd > 10 ? dd : "0" + dd) + "/" + (mm > 10 ? mm : "0" + mm) + "/" + yyyy;
-  return date;
-}
+// import { BookingProvider } from '../Store/BookingContext';
+import { BookingProvider } from "../../../../store/BookingContext";
 
-const Admin = () => {
+export default function Admin() {
   const [bookings, setBookings] = useState([]);
   const [status, setStatus] = useState("pending");
   const [date, setDate] = useState(ConvertDate(new Date()));
@@ -47,12 +42,9 @@ const Admin = () => {
   }, [status]);
 
   return (
-    <div>
-      {loading && <div className="loading">Loading...</div>}
-      <Sort status={setStatus} />
-      <Table bookings={bookings} setBookings={setBookings} />
-    </div>
+    <BookingProvider>
+      <Sort />
+      <Table />
+    </BookingProvider>
   );
-};
-
-export default Admin;
+}
