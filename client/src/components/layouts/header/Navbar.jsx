@@ -15,7 +15,7 @@ const Navbar = () => {
   return (
     <nav
       id="nav"
-      className="w-[100%] z-50 sticky top-0 py-2 lg:py-0 pl-4 flex items-center justify-between lg:justify-start bg-white text-[16px]"
+      className="w-[100%] z-40 sticky top-0 py-2 lg:py-0 pl-4 flex items-center justify-between lg:justify-start bg-white text-[16px]"
     >
       <a href="/" className="mr-8 p-2">
         <img
