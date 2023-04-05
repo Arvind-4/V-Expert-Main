@@ -15,7 +15,7 @@ const Modal = ({ booking, display }) => {
   return (
     <>
       {createPortal(<Overlay />, document.getElementById("overlay"))}
-      <div className="w-3/4 h-3/4 p-4 overflow-scroll Scroll bg-white border-2 rounded absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      <div className="w-3/4 h-3/4 p-4 overflow-scroll Scroll bg-white border-2 rounded absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50">
         <h1 className="text-2xl">{booking.name}</h1>
         <p className="mb-4">Property Type - {booking.propertyType}</p>
         <caption className="text-xl">Services</caption>

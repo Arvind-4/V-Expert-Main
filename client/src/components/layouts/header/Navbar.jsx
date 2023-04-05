@@ -79,7 +79,7 @@ const Navbar = () => {
             Contact
           </a>
         </div>
-        <div class="hidden lg:inline">
+        <div className="hidden lg:inline">
           <i
             className="fa-lg fa-solid fa-magnifying-glass cursor-pointer"
             onClick={toggleModal}

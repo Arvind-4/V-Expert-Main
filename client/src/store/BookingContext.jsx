@@ -14,7 +14,7 @@ export function ConvertDate(date) {
 }
 
 function filterBookings(array, status, date){
-  return array.filter(value => value.date === date && value.status === status)
+  return array.filter(value => value.date === date || value.status === status)
 }
 
 const BookingContext = createContext({
@@ -36,6 +36,7 @@ function bookingReducer(state, action) {
     case 'FILTER_DATE':
       return {items: filterBookings(bookings, state.filter.status, action.date), filter: {...state.filter, date: action.date}}
     case 'FILTER_STATUS':
+      console.log(bookings);
       return {items: filterBookings(bookings, action.status, state.filter.date), filter: {...state.filter, status: action.status}};
   }
 }
@@ -48,16 +49,12 @@ export const BookingProvider = (props) => {
     filterDate: (date) => dispatchBookings({ type: "FILTER_DATE", date: date }),
     filterStatus: (status) => dispatchBookings({ type: "FILTER_STATUS", status: status }),
     removeBooking: async (id) => {
-      const isDeleted = await deleteBooking(id);
+      deleteBooking(id);
     },
     changeStatus: async (id, status) => {
-      const isChanged = await changeStatus(id, status);
+      changeStatus(id, status);
   },
   };
-  useEffect(async () => {
-    const {data} = await fetchAll();
-    console.log(data);
-  }, []);
   return (
     <BookingContext.Provider value={bookingContext}>
       {props.children}
