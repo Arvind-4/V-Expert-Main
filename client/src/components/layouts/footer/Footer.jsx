@@ -5,6 +5,7 @@ const FooterLink = (props) => {
   return (
     <li>
       <a
+        key={props.index}
         className="mb-4"
         href={`/${props.name.toLowerCase()}/${props.link.path}`}
       >
@@ -56,25 +57,25 @@ const Footer = () => {
         </div>
         <div className="flex gap-8">
           <ul className="lg:row-span-full">
-            <h6 className="uppercase text-yellow-400 font-bold mb-4 flex text-gold">
+            <h6 className="uppercase font-bold mb-4 flex text-gold">
               Services
             </h6>
-            {services.map((link) => {
-              return <FooterLink name={"services"} link={link} />;
+            {services.map((link, index) => {
+              return <FooterLink name={"services"} link={link} index={index} />;
             })}
           </ul>
 
           <ul className="lg:row-span-full">
-            <h6 className="uppercase text-yellow-400 font-bold mb-4 flex text-gold">
+            <h6 className="uppercase font-bold mb-4 flex text-gold">
               Packages
             </h6>
-            {packages.map((link) => {
-              return <FooterLink name={"packages"} link={link} />;
+            {packages.map((link, index) => {
+              return <FooterLink name={"packages"} link={link} index={index} />;
             })}
           </ul>
 
           <ul className="lg:row-span-full">
-            <h6 className="uppercase text-yellow-400 font-bold mb-4 flex text-gold">
+            <h6 className="uppercase font-bold mb-4 flex text-gold">
               Useful Links
             </h6>
             <li>
@@ -96,7 +97,7 @@ const Footer = () => {
         </div>
 
         <div className="max-w-[300px]">
-          <h6 className="uppercase text-yellow-400 font-bold mb-4 flex text-gold">
+          <h6 className="uppercase font-bold mb-4 flex text-gold">
             Contact
           </h6>
           <p className="flex items-center">
@@ -111,7 +112,7 @@ const Footer = () => {
           </p>
         </div>
       </div>
-      <div className="text-center p-6 bg-yellow-400 text-white bg-blue border-t-2 border-t-gold">
+      <div className="text-center p-6 text-white bg-blue border-t-2 border-t-gold">
         <a className="font-bold" href="/">
           <span className="font-light">© 2022 Copyright </span>V Expert
         </a>

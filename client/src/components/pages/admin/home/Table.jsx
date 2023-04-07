@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import "../../../../assests/css/table.module.css";
 import styles from "../../../../assests/css/table.module.css";
 import Modal from "./Modal";
 import { createPortal } from "react-dom";
@@ -93,7 +92,7 @@ const Bookings = (props) => {
 
 const Table = () => {
   const bookingContext = useContext(BookingContext);
-  console.log("Table", bookingContext.items);
+  // console.log("Table", bookingContext.items);
   return (
     <div className="mx-auto max-w-full rounded overflow-x-scroll Scroll">
       {bookingContext.items && bookingContext.items.length > 0 ? (

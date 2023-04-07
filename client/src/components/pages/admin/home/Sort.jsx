@@ -9,9 +9,9 @@ const Bookings = BookingResponse.data;
 let dates = [];
 Bookings.forEach((booking) => {
   dates.push(booking.date);
-  // dates = dates.filter((value, index, array) => {
-  //   return array.indexOf(value) === index;
-  // });
+  dates = dates.filter((value, index, array) => {
+    return array.indexOf(value) === index;
+  });
 });
 export default function Sort() {
   const bookingContext = useContext(BookingContext);
