@@ -8,8 +8,9 @@ export default defineConfig({
     outDir: "build",
     emptyOutDir: true,
     sourcemap: true,
+    target: "esnext",
   },
   server: {
     port: 3000,
-  },
+  }
 });
