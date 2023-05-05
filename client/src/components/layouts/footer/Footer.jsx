@@ -5,7 +5,6 @@ const FooterLink = (props) => {
   return (
     <li>
       <a
-        key={props.index}
         className="mb-4"
         href={`/${props.name.toLowerCase()}/${props.link.path}`}
       >
@@ -24,22 +23,22 @@ const Footer = () => {
         <ul className="flex items-center justify-center text-2xl">
           <li className="mr-4">
             <a href="https://www.facebook.com/VETS2022">
-              <i class="fa-brands fa-facebook-f"></i>
+              <i className="fa-brands fa-facebook-f"></i>
             </a>
           </li>
           <li className="mr-4">
             <a href="/">
-              <i class="fa-brands fa-twitter"></i>
+              <i className="fa-brands fa-twitter"></i>
             </a>
           </li>
           <li className="mr-4">
             <a href="/">
-              <i class="fa-brands fa-instagram"></i>
+              <i className="fa-brands fa-instagram"></i>
             </a>
           </li>
           <li>
             <a href="https://linkedin.com/in/v-expert-technical-services-est-329887259">
-              <i class="fa-brands fa-linkedin"></i>
+              <i className="fa-brands fa-linkedin"></i>
             </a>
           </li>
         </ul>
@@ -61,7 +60,7 @@ const Footer = () => {
               Services
             </h6>
             {services.map((link, index) => {
-              return <FooterLink name={"services"} link={link} index={index} />;
+              return <FooterLink name={"services"} link={link} key={index} />;
             })}
           </ul>
 
@@ -70,7 +69,7 @@ const Footer = () => {
               Packages
             </h6>
             {packages.map((link, index) => {
-              return <FooterLink name={"packages"} link={link} index={index} />;
+              return <FooterLink name={"packages"} link={link} key={index}/>;
             })}
           </ul>
 
@@ -79,17 +78,17 @@ const Footer = () => {
               Useful Links
             </h6>
             <li>
-              <a href="/#about" className="">
+              <a key="10" href="/#about" className="">
                 About
               </a>
             </li>
             <li>
-              <a href="/#package" className="">
+              <a key="20" href="/#package" className="">
                 Packages
               </a>
             </li>
             <li>
-              <a href="/#service" className="">
+              <a key="30" href="/#service" className="">
                 Services
               </a>
             </li>
@@ -99,14 +98,14 @@ const Footer = () => {
         <div className="max-w-[300px]">
           <h6 className="uppercase font-bold mb-4 flex text-gold">Contact</h6>
           <p className="flex items-center">
-            <i class="fa-solid fa-location-dot mr-2"></i>534,536, 5th Floor
+            <i className="fa-solid fa-location-dot mr-2"></i>534,536, 5th Floor
             Business village, Deira clock tower - Deira Dubai, UAE.
           </p>
           <p className="flex items-center">
-            <i class="fa-regular fa-envelope mr-2"></i>cs@vexpert.ae
+            <i className="fa-regular fa-envelope mr-2"></i>cs@vexpert.ae
           </p>
           <p className="flex items-center">
-            <i class="fa-solid fa-phone mr-2"></i>+971 508446765, +971 508446737
+            <i className="fa-solid fa-phone mr-2"></i>+971 508446765, +971 508446737
           </p>
         </div>
       </div>

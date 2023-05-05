@@ -22,7 +22,7 @@ const ServiceSlide = (props) => {
       />
       <div className="relative bg-white z-10 mt-[120px] mb-4 mx-4 text-center p-4 rounded h-[200px]">
         <i
-          class={`fa-solid ${props.icon} fa-lg absolute top-[-30px] left-0 bg-gold w-[40px] h-[40px] flex items-center justify-center rounded-full`}
+          className={`fa-solid ${props.icon} fa-lg absolute top-[-30px] left-0 bg-gold w-[40px] h-[40px] flex items-center justify-center rounded-full`}
         ></i>
         <h4 className="mb-2 text-2xl lg:text-lg font-semibold">{props.name}</h4>
         <p className="text-sm lg:text-xs">{props.description}</p>
@@ -45,9 +45,9 @@ const ServiceCarousel = (props) => {
         modules={[Pagination, Navigation]}
         className={"mySwiper"}
       >
-        {services.map((service) => {
+        {services.map((service, index) => {
           return (
-            <SwiperSlide>
+            <SwiperSlide key={index}>
               <ServiceSlide
                 path={service.path}
                 img={service.img}

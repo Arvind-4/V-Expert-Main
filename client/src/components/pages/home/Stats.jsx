@@ -8,7 +8,7 @@ const Stats = () => {
           15+
         </h1>
         <p className="flex items-center text-xl md:text-4xl mt-3">
-          <p>Years</p>
+          <span>Years</span>
           <span className="w-[50px] md:w-[150px] h-1 bg-gold ml-4 mt-2"></span>
         </p>
         <p className="text-xl md:text-4xl">Professional Engineers</p>

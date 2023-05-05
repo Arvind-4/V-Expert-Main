@@ -8,7 +8,7 @@ const Service = () => {
         <div className="max-w-full py-12 px-8 flex flex-col lg:flex-row lg:gap-8 md:place-items-center">
           <div className="text-blue">
             <p className="flex items-center text-xl mt-3">
-              <p>Our Services</p>
+              <span>Our Services</span>
               <span className="w-[50px] md:w-[150px] h-1 bg-gold ml-4 mt-2"></span>
             </p>
             <h1 className="text-5xl sm:text-6xl">What we Offer</h1>

@@ -9,7 +9,7 @@ const About = () => {
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
         <path
           fill="#031F60"
-          fill-opacity="1"
+          fillOpacity="1"
           d="M0,288L48,272C96,256,192,224,288,197.3C384,171,480,149,576,165.3C672,181,768,235,864,250.7C960,267,1056,245,1152,250.7C1248,256,1344,288,1392,304L1440,320L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
         ></path>
       </svg>
@@ -20,7 +20,7 @@ const About = () => {
           </div>
           <article className="max-w-[500px] md:max-w-[800px] text-white">
             <p className="flex items-center text-xl mt-3">
-              <p>Welcome to V-Expert</p>
+              <span>Welcome to V-Expert</span>
               <span className="w-[50px] md:w-[150px] h-1 bg-gold ml-4 mt-2"></span>
             </p>
             <h1 className="text-5xl sm:text-6xl">
@@ -54,7 +54,7 @@ const About = () => {
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
         <path
           fill="#031F60"
-          fill-opacity="1"
+          fillOpacity="1"
           d="M0,224L40,218.7C80,213,160,203,240,208C320,213,400,235,480,229.3C560,224,640,192,720,186.7C800,181,880,203,960,197.3C1040,192,1120,160,1200,170.7C1280,181,1360,235,1400,261.3L1440,288L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"
         ></path>
       </svg>

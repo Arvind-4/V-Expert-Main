@@ -93,9 +93,8 @@ const TestimonyForm = () => {
           name="review"
           rows={5}
           className="p-2 min-w-[250px] max-w-md outline-none border-gold border-2 rounded bg-blue resize-none "
-        >
-          {description}
-        </textarea>
+          value={description}
+        />
         <input
           type="submit"
           value={"Submit Feedback"}

@@ -41,7 +41,7 @@ const Package = () => {
         </p>
       </div>
       <div className="flex flex-wrap items-center justify-center gap-8">
-        {packages.map((card) => {
+        {packages.map((card, index) => {
           return (
             <PackageCard
               name={card.name}
@@ -50,6 +50,7 @@ const Package = () => {
               rsc={card.rsc}
               hs={card.hs}
               path={card.path}
+              key={index}
             />
           );
         })}
