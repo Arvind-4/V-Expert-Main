@@ -35,7 +35,7 @@ const Bookings = (props) => {
             <td className="text-center">{booking.id}</td>
             <td className="max-w-[200px] min-w-[200px]">{booking.name}</td>
             <td className="max-w-[200px] min-w-[200px]">{booking.email}</td>
-            <td>{booking.phone}</td>
+            <td>{booking.phoneNumber}</td>
             <td className="max-w-[300px] min-w-[300px]">
               <div className={`Scroll h-16 overflow-y-scroll`}>
                 {booking.address}

@@ -10,8 +10,6 @@ const Modal = ({ booking, display }) => {
     display((prevState) => !prevState);
   };
 
-  console.log("Modal Rendered", booking);
-
   return (
     <>
       {createPortal(<Overlay />, document.getElementById("overlay"))}
@@ -24,7 +22,7 @@ const Modal = ({ booking, display }) => {
 
         {booking.serviceList && booking.serviceList.length > 0 ? (
           <ul className="ml-8 list-disc my-2">
-            {booking.services.map((service) => (
+            {booking.serviceList.map((service) => (
               <li>{service}</li>
             ))}
           </ul>
@@ -35,7 +33,7 @@ const Modal = ({ booking, display }) => {
         <caption className="text-xl">Packages</caption>
         {booking.packageList && booking.packageList.length > 0 ? (
           <ul className="ml-8 list-disc my-2">
-            {booking.serviceList.map((pkg) => (
+            {booking.packageList.map((pkg) => (
               <li>{pkg}</li>
             ))}
           </ul>

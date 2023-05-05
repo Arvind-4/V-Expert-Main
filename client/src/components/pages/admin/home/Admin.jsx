@@ -10,7 +10,6 @@ import { BookingProvider } from "../../../../store/BookingContext";
 export default function Admin() {
   const [bookings, setBookings] = useState([]);
   const [status, setStatus] = useState("pending");
-  const [date, setDate] = useState(ConvertDate(new Date()));
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
