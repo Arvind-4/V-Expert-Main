@@ -1,5 +1,6 @@
 import React from "react";
 import Rating from "@mui/material/Rating";
+import { Alert } from "./Alert";
 import { baseUrl } from "../../constants/index";
 import "../../assests/css/home.css";
 
@@ -21,20 +22,37 @@ const TestimonyForm = () => {
   async function submitHandler(event) {
     event.preventDefault();
     const data = { name: name, ratingScore: rating, review: description };
-    const response = await fetch(`${baseUrl}/rating/create-rating`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    if (response.status === 201) {
-      alert("Thank you for your feedback!");
-      setName("");
-      setRating(0);
-      setDescription("");
+    console.log("rating data", data.ratingScore);
+    if (
+      data.ratingScore === 0 ||
+      data.ratingScore === null ||
+      data.ratingScore === undefined
+    ) {
+      return Alert("Error", "Please select a rating.", "error");
     } else {
-      alert("Something went wrong. Please try again later.");
+      const response = await fetch(`${baseUrl}/rating/create-rating`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      if (response.status === 201) {
+        // alert("Thank you for your feedback!");
+        Alert("Success", "Thank you for your feedback!", "success");
+        setName("");
+        setRating(0);
+        setDescription("");
+        return;
+      } else {
+        Alert(
+          "Error",
+          "Something went wrong. Please try again later.",
+          "error"
+        );
+        // alert("Something went wrong. Please try again later.");
+        return;
+      }
     }
   }
 
@@ -55,6 +73,7 @@ const TestimonyForm = () => {
             name="half-rating-read"
             precision={0.5}
             size="large"
+            required={true}
           />
         </div>
         <label htmlFor="name">Your Name</label>
@@ -65,6 +84,7 @@ const TestimonyForm = () => {
           id="name"
           name="name"
           className="p-2 outline-none border-gold border-2 rounded bg-blue"
+          required
         />
         <label htmlFor="review">Your Experience</label>
         <textarea

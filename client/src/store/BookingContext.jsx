@@ -1,5 +1,9 @@
 import { createContext, useEffect, useReducer } from "react";
-import { deleteBooking, changeStatus, fetchAll, } from "../components/pages/admin/api";
+import {
+  deleteBooking,
+  changeStatus,
+  fetchAll,
+} from "../components/pages/admin/api";
 
 let res = await fetchAll();
 let bookings = res.data;
@@ -13,8 +17,11 @@ export function ConvertDate(date) {
   return date;
 }
 
-function filterBookings(array, status, date){
-  return array.filter(value => value.date === date || value.status === status)
+function filterBookings(array, status, date) {
+  return (
+    array.filter((value) => value.date === date || value.status === status) ||
+    []
+  );
 }
 
 const BookingContext = createContext({
@@ -32,28 +39,38 @@ const defaultBooking = {
 };
 
 function bookingReducer(state, action) {
-  switch(action.type){
-    case 'FILTER_DATE':
-      return {items: filterBookings(bookings, state.filter.status, action.date), filter: {...state.filter, date: action.date}}
-    case 'FILTER_STATUS':
+  switch (action.type) {
+    case "FILTER_DATE":
+      return {
+        items: filterBookings(bookings, state.filter.status, action.date),
+        filter: { ...state.filter, date: action.date },
+      };
+    case "FILTER_STATUS":
       console.log(bookings);
-      return {items: filterBookings(bookings, action.status, state.filter.date), filter: {...state.filter, status: action.status}};
+      return {
+        items: filterBookings(bookings, action.status, state.filter.date),
+        filter: { ...state.filter, status: action.status },
+      };
   }
 }
 
 export const BookingProvider = (props) => {
-  const [bookingState, dispatchBookings] = useReducer(bookingReducer, defaultBooking);
+  const [bookingState, dispatchBookings] = useReducer(
+    bookingReducer,
+    defaultBooking
+  );
   const bookingContext = {
     items: bookingState.items,
     filter: bookingState.filter,
     filterDate: (date) => dispatchBookings({ type: "FILTER_DATE", date: date }),
-    filterStatus: (status) => dispatchBookings({ type: "FILTER_STATUS", status: status }),
+    filterStatus: (status) =>
+      dispatchBookings({ type: "FILTER_STATUS", status: status }),
     removeBooking: async (id) => {
       deleteBooking(id);
     },
     changeStatus: async (id, status) => {
       changeStatus(id, status);
-  },
+    },
   };
   return (
     <BookingContext.Provider value={bookingContext}>
@@ -63,4 +80,3 @@ export const BookingProvider = (props) => {
 };
 
 export default BookingContext;
-

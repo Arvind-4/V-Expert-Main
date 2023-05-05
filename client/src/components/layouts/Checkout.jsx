@@ -1,11 +1,15 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { Alert } from "./Alert";
 import { baseUrl } from "../../constants";
 import logo from "../../assests/images/Footer-Logo.png";
 import Tabs from "./Tabs";
 
 let packageList = [];
 let serviceList = [];
+
 const Checkout = (props) => {
+  const navigate = useNavigate();
   const submitHandler = async (e) => {
     e.preventDefault();
     let items = { ...localStorage };
@@ -19,12 +23,14 @@ const Checkout = (props) => {
     });
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
+    console.log("from data", data);
     const newData = {
       ...data,
+      status: "pending",
       serviceList: serviceList,
       packageList: packageList,
     };
-    const response = await fetch(`${baseUrl}/bookings`, {
+    const response = await fetch(`${baseUrl}/book`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -32,11 +38,12 @@ const Checkout = (props) => {
       body: JSON.stringify(newData),
     });
     const res = await response.json();
-    if (response.status === 200) {
-      alert("Booking Successful");
-      window.location.href = "/";
+    console.log("status", response.status);
+    if (response.status === 201) {
+      Alert("Booking Successful", "Your booking has been confirmed", "success");
+      navigate("/", { replace: true });
     } else {
-      alert("Booking Failed");
+      Alert("Booking Failed", "Failed to Book. Please Try Again", "error");
     }
   };
 

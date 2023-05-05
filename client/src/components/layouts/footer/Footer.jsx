@@ -97,9 +97,7 @@ const Footer = () => {
         </div>
 
         <div className="max-w-[300px]">
-          <h6 className="uppercase font-bold mb-4 flex text-gold">
-            Contact
-          </h6>
+          <h6 className="uppercase font-bold mb-4 flex text-gold">Contact</h6>
           <p className="flex items-center">
             <i class="fa-solid fa-location-dot mr-2"></i>534,536, 5th Floor
             Business village, Deira clock tower - Deira Dubai, UAE.

@@ -1,4 +1,5 @@
 import { baseUrl } from "../../../constants";
+import { Alert } from "../../layouts/Alert";
 
 async function fetchPending() {
   const response = await fetch(`${baseUrl}/book/pending`, {
@@ -67,7 +68,8 @@ const bookingComplete = async (id) => {
     body: JSON.stringify({ status: "completed" }),
   });
   if (response.status === 200) {
-    alert("Booking Completed");
+    Alert("Booking Completed", "Booking has been completed", "success");
+    window.location.reload(true);
     return true;
   } else {
     return false;
@@ -99,7 +101,8 @@ async function deleteBooking(id) {
     },
   });
   if (response.status === 200) {
-    alert("Booking Deleted");
+    Alert("Booking Deleted", "Booking has been deleted", "success");
+    window.location.reload(true);
     return true;
   } else {
     return false;
@@ -116,7 +119,12 @@ async function changeStatus(id, status) {
     body: JSON.stringify({ status: status }),
   });
   if (response.status === 200) {
-    alert("Booking Status Changed");
+    Alert(
+      "Booking Status Changed",
+      "Booking status has been changed",
+      "success"
+    );
+    window.location.reload(true);
     return true;
   } else {
     return false;
