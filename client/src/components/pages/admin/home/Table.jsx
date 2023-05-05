@@ -21,6 +21,8 @@ const Bookings = (props) => {
     bookingContext.removeBooking(id);
   };
 
+  console.log("Bookings", props.bookings)
+
   return (
     <tbody>
       {showModal
@@ -31,8 +33,8 @@ const Bookings = (props) => {
         : ""}
       {props.bookings.map((booking) => {
         return (
-          <tr key={booking.id} className="shadow-md">
-            <td className="text-center">{booking.id}</td>
+          <tr key={booking.created} className="shadow-md">
+            <td className="text-center">{new Date(booking.created).toDateString()}</td>
             <td className="max-w-[200px] min-w-[200px]">{booking.name}</td>
             <td className="max-w-[200px] min-w-[200px]">{booking.email}</td>
             <td>{booking.phoneNumber}</td>
@@ -99,7 +101,7 @@ const Table = () => {
         <table className={`${styles.Table}`}>
           <thead>
             <tr className="h-16">
-              <th className="">ID</th>
+              <th className="">Created Date</th>
               <th>Name</th>
               <th>Email</th>
               <th>Phone</th>
