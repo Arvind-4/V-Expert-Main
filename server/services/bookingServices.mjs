@@ -25,8 +25,8 @@ const createNewBookingService = async (body) => {
       packageList,
       requirements,
       email,
-      date,
-      time,
+      pdate,
+      ptime,
       status,
     } = body;
     if (!name) {
@@ -42,8 +42,8 @@ const createNewBookingService = async (body) => {
       packageList,
       requirements,
       email,
-      date,
-      time,
+      date: pdate,
+      time: ptime,
       status,
     };
     await bookingCollection.set(bookingId, booking);
