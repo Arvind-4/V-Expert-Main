@@ -9,8 +9,6 @@ const Bookings = (props) => {
   const [booking, setBooking] = React.useState({});
   const [showModal, setshowModal] = React.useState(false);
 
-  console.log(bookingContext.items);
-
   const viewClickHandler = (id) => {
     setshowModal((prevState) => !prevState);
     setBooking(props.bookings.find((booking) => booking.id === id));

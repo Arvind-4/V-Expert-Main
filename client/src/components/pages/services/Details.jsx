@@ -21,8 +21,8 @@ const Details = ({ service }) => {
       <p className="mb-4">{service.details.para2}</p>
       <ul className="list-disc">
         {service.details.label}
-        {service.details.features.map((feature) => (
-          <li className="ml-8">{feature}</li>
+        {service.details.features.map((feature, index) => (
+          <li className="ml-8" key={index}>{feature}</li>
         ))}
       </ul>
       <div className="flex flex-wrap gap-x-4">

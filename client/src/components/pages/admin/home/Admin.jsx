@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Table from "./Table";
 import Sort from "./Sort";
+import AdminHeader from "../AdminHeader";
 
 import { useNavigate } from "react-router-dom";
 import { getBookings, checkToken } from "../api";
@@ -39,6 +40,7 @@ export default function Admin() {
 
   return (
     <BookingProvider>
+      <AdminHeader />
       <Sort />
       <Table />
     </BookingProvider>

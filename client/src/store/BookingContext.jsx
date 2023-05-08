@@ -19,7 +19,7 @@ export function ConvertDate(date) {
 
 function filterBookings(array, status, date) {
   return (
-    array.filter((value) => value.date === date || value.status === status) ||
+    array.filter((value) => value.date === date && value.status === status) ||
     []
   );
 }
@@ -35,7 +35,7 @@ const BookingContext = createContext({
 
 const defaultBooking = {
   items: bookings,
-  filter: { status: "pending", date: "" },
+  filter: { status: "pending", date: ConvertDate(new Date()) },
 };
 
 function bookingReducer(state, action) {
@@ -46,7 +46,6 @@ function bookingReducer(state, action) {
         filter: { ...state.filter, date: action.date },
       };
     case "FILTER_STATUS":
-      console.log(bookings);
       return {
         items: filterBookings(bookings, action.status, state.filter.date),
         filter: { ...state.filter, status: action.status },

@@ -18,7 +18,7 @@ const Service = () => {
   return (
     <main className="bg-gray pb-12">
       <About service={Service} />
-      <section className="bg-white flex items-center justify-evenly flex-wrap-reverse gap-8 shadow-lg shadow-black mx-4 p-4 xl:mx-auto max-w-[1400px]">
+      <section className="mb-32 bg-white flex items-center justify-evenly flex-wrap-reverse gap-8 shadow-lg shadow-black mx-4 p-4 xl:mx-auto max-w-[1400px]">
         <article>
           <img
             src={Service.img}

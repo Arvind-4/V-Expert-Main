@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/layouts/header/Header";
 import Home from "./components/pages/home/Home";

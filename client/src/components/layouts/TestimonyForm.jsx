@@ -7,6 +7,7 @@ import "../../assests/css/home.css";
 const TestimonyForm = () => {
   const [rating, setRating] = React.useState(0);
   const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
   const [description, setDescription] = React.useState("");
 
   const onChangeRating = (event, newValue) => {
@@ -15,14 +16,16 @@ const TestimonyForm = () => {
   const onChangeName = (event) => {
     setName(event.target.value);
   };
+  const onChangeEmail = (event) => {
+    setEmail(event.target.value);
+  };
   const onChangeDescription = (event) => {
     setDescription(event.target.value);
   };
 
   async function submitHandler(event) {
     event.preventDefault();
-    const data = { name: name, ratingScore: rating, review: description };
-    console.log("rating data", data.ratingScore);
+    const data = { name: name, ratingScore: rating, email: email, review: description };
     if (
       data.ratingScore === 0 ||
       data.ratingScore === null ||
@@ -42,6 +45,7 @@ const TestimonyForm = () => {
         Alert("Success", "Thank you for your feedback!", "success");
         setName("");
         setRating(0);
+        setEmail("");
         setDescription("");
         return;
       } else {
@@ -83,6 +87,16 @@ const TestimonyForm = () => {
           type="text"
           id="name"
           name="name"
+          className="p-2 outline-none border-gold border-2 rounded bg-blue"
+          required
+        />
+        <label htmlFor="email">Your Email</label>
+        <input
+          onChange={onChangeEmail}
+          value={name}
+          type="email"
+          id="email"
+          name="email"
           className="p-2 outline-none border-gold border-2 rounded bg-blue"
           required
         />

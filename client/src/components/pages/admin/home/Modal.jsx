@@ -16,31 +16,31 @@ const Modal = ({ booking, display }) => {
       <div className="w-3/4 h-3/4 p-4 overflow-scroll Scroll bg-white border-2 rounded absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50">
         <h1 className="text-2xl">{booking.name}</h1>
         <p className="mb-4">Property Type - {booking.propertyType}</p>
-        <caption className="text-xl">Services</caption>
+        <h2 className="text-xl">Services</h2>
         {/* {booking.services.length === 0 && <p>No Services Selected</p>}
             {booking.pkg.length === 0 && <p>No Packages Selected</p>} */}
 
         {booking.serviceList && booking.serviceList.length > 0 ? (
           <ul className="ml-8 list-disc my-2">
-            {booking.serviceList.map((service) => (
-              <li>{service}</li>
+            {booking.serviceList.map((service, index) => (
+              <li key={index}>{service}</li>
             ))}
           </ul>
         ) : (
           <p>No Services Selected</p>
         )}
 
-        <caption className="text-xl">Packages</caption>
+        <h2 className="text-xl">Packages</h2>
         {booking.packageList && booking.packageList.length > 0 ? (
           <ul className="ml-8 list-disc my-2">
-            {booking.packageList.map((pkg) => (
-              <li>{pkg}</li>
+            {booking.packageList.map((pkg, index) => (
+              <li key={index}>{pkg}</li>
             ))}
           </ul>
         ) : (
           <p>No Packages Selected</p>
         )}
-        <h3 className="text-xl">Additional Requirements</h3>
+        <h2 className="text-xl">Additional Requirements</h2>
         <p>{booking.requirements}</p>
         <button
           className="fixed top-0 right-0 px-2 bg-gray-400"
