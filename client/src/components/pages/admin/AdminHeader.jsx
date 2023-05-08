@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { downloadData } from "./api";
+import { exportToCsv } from "./csv";
 
 export default () => {
   let navigate = useNavigate();
@@ -16,23 +17,18 @@ export default () => {
       }
     >
       <button
-        className={
-          "text-lg px-2 py-1 border-2 rounded"
-        }
-        onClick={downloadData}
+        className={"text-lg px-2 py-1 border-2 rounded"}
+        onClick={exportToCsv}
       >
         Download Report
       </button>
 
       <button
-        className={
-          "text-lg px-2 py-1 border-2 bg-blue text-white rounded"
-        }
+        className={"text-lg px-2 py-1 border-2 bg-blue text-white rounded"}
         onClick={handleLogout}
       >
         Log Out
       </button>
-
     </div>
   );
 };

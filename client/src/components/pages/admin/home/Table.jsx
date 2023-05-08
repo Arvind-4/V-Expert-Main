@@ -32,7 +32,9 @@ const Bookings = (props) => {
       {props.bookings.map((booking) => {
         return (
           <tr key={booking.created} className="shadow-md">
-            <td className="text-center">{new Date(booking.created).toDateString()}</td>
+            <td className="text-center">
+              {new Date(booking.created).toDateString()}
+            </td>
             <td className="max-w-[200px] min-w-[200px]">{booking.name}</td>
             <td className="max-w-[200px] min-w-[200px]">{booking.email}</td>
             <td>{booking.phoneNumber}</td>

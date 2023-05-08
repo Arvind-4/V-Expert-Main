@@ -93,7 +93,11 @@ export default () => {
           >
             Search
           </button>
-          {!loading ? results.map((item, index) => <SearchCard {...item} key={index} />) : <></>}
+          {!loading ? (
+            results.map((item, index) => <SearchCard {...item} key={index} />)
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </>

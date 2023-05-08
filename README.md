@@ -18,10 +18,10 @@ The project is a full stack MERN project.
 ### For Front-End
 
 `cd client` \
-`npm install` 
+`npm install`
 
 ### Run Dev Server for Front-End & Back-End Simultaneously
 
-`npm run dev` 
+`npm run dev`
 
 Note: Tailwind CSS file located in **_.src/assests/css/tailwind/output.css_**

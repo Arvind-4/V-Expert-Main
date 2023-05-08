@@ -69,7 +69,7 @@ const Footer = () => {
               Packages
             </h6>
             {packages.map((link, index) => {
-              return <FooterLink name={"packages"} link={link} key={index}/>;
+              return <FooterLink name={"packages"} link={link} key={index} />;
             })}
           </ul>
 
@@ -105,7 +105,8 @@ const Footer = () => {
             <i className="fa-regular fa-envelope mr-2"></i>cs@vexpert.ae
           </p>
           <p className="flex items-center">
-            <i className="fa-solid fa-phone mr-2"></i>+971 508446765, +971 508446737
+            <i className="fa-solid fa-phone mr-2"></i>+971 508446765, +971
+            508446737
           </p>
         </div>
       </div>

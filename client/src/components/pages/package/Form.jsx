@@ -43,7 +43,9 @@ const Form = ({ packageType }) => {
       >
         <option selected="selected">Select Property Type</option>
         {Object.keys(packageType.properties).map((property, index) => (
-          <option key={index} value={property}>{property}</option>
+          <option key={index} value={property}>
+            {property}
+          </option>
         ))}
       </select>
       {/* Submit Button */}

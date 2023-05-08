@@ -25,7 +25,12 @@ const TestimonyForm = () => {
 
   async function submitHandler(event) {
     event.preventDefault();
-    const data = { name: name, ratingScore: rating, email: email, review: description };
+    const data = {
+      name: name,
+      ratingScore: rating,
+      email: email,
+      review: description,
+    };
     if (
       data.ratingScore === 0 ||
       data.ratingScore === null ||
