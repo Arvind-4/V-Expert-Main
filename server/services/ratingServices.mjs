@@ -1,42 +1,32 @@
-import { db } from "../index.mjs";
-import { v4 as uuidv4 } from "uuid";
-import logger from "../utils/logger.mjs";
+import { createTransport } from "nodemailer";
+import { email, password, mailHost, mailPort } from "../constants/index.mjs";
 
 const createRatingService = async (body) => {
-  try {
-    const ratingCollection = await db.collection("ratings");
-    const { name, ratingScore, review } = body;
-    if (!name || !ratingScore || !review) {
-      return null;
+  const transporter = createTransport({
+    host: mailHost,
+    port: mailPort,
+    auth: {
+      user: email,
+      pass: password,
+    },
+  });
+  const mail = {
+    from: body.email,
+    to: email,
+    subject: `New Rating from ${body.name}`,
+    text: `
+      Name: ${body.name} \n
+      Email: ${body.email} \n 
+      Rating: ${body.ratingScore} \n 
+      Review: ${body.review}
+      `,
+  };
+  transporter.sendMail(mail, (err, data) => {
+    if (err) {
+      return false;
     }
-    const ratingId = uuidv4();
-
-    const ratingObj = {
-      id: ratingId,
-      name: name,
-      rating: ratingScore,
-      review: review,
-    };
-
-    await ratingCollection.set(ratingId, ratingObj);
-    return ratingObj;
-  } catch (e) {
-    logger.error(`Enable to call DB functions ${e}`);
-    return null;
-  }
+  });
+  return true;
 };
 
-const getAllRatingService = async () => {
-  const ratingsCollection = await db.collection("ratings");
-  const { results } = await ratingsCollection.list();
-  const ratings = await Promise.all(
-    results.map(async ({ key }) => (await ratingsCollection.get(key)).props)
-  );
-  if (ratings) {
-    return ratings;
-  } else {
-    return null;
-  }
-};
-
-export { createRatingService, getAllRatingService };
+export { createRatingService };
