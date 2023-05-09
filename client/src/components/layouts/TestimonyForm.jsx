@@ -98,7 +98,7 @@ const TestimonyForm = () => {
         <label htmlFor="email">Your Email</label>
         <input
           onChange={onChangeEmail}
-          value={name}
+          value={email}
           type="email"
           id="email"
           name="email"
