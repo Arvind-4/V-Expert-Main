@@ -94,7 +94,6 @@ const Bookings = (props) => {
 
 const Table = () => {
   const bookingContext = useContext(BookingContext);
-  // console.log("Table", bookingContext.items);
   return (
     <div className="mx-auto max-w-full rounded overflow-x-scroll Scroll">
       {bookingContext.items && bookingContext.items.length > 0 ? (
