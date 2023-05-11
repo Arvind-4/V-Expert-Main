@@ -5,6 +5,7 @@ import {
   generateTokenForUser,
   findUser,
   verifyToken,
+  changePasswordService
 } from "../services/userServices.mjs";
 
 const signUp = async (req, res) => {
@@ -119,4 +120,38 @@ const checkToken = async (req, res) => {
   }
 };
 
-export { signUp, getUser, signIn, checkToken };
+const changePassword = async (req, res) => {
+  const { email, oldPassword, newPassword } = req.body;
+
+  if (!email || !oldPassword || !newPassword)
+    return res
+      .status(400)
+      .json({ message: "Email, Old Password and New Password Required" });
+
+  try {
+    const user = await changePasswordService(email, oldPassword, newPassword);
+    console.log("user", user)
+    if (user)
+      res.status(200).json({
+        data: user,
+        success: true,
+        message: "Password Changed",
+      });
+    else
+      res.status(401).json({
+        message: "Wrong Credentials",
+        success: false,
+        data: null,
+      });
+  }
+  catch (e) {
+    logger.error(`Enable to call DB functions ${e}`);
+    res.status(500).json({
+      message: "Internal Server Error",
+      success: false,
+      data: null,
+    });
+  }
+};
+
+export { signUp, getUser, signIn, checkToken, changePassword };
