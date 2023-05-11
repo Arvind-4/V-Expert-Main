@@ -110,4 +110,19 @@ const changePasswordService = async (email, oldpassword, newpassword) => {
   }
 }
 
-export { createUserService, findUser, generateTokenForUser, verifyToken, changePasswordService };
+const deleteAllUsersService = async () => {
+  try {
+    const userCollection = await db.collection("users");
+    const { results } = await userCollection.list();
+    for (let i = 0; i < results.length; i++) {
+      console.log("Deleting Key", results[i].key);
+      await userCollection.delete(results[i].key);
+    }
+    return true;
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+}
+
+export { createUserService, findUser, generateTokenForUser, verifyToken, changePasswordService, deleteAllUsersService };

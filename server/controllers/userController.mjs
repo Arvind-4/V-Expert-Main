@@ -5,7 +5,8 @@ import {
   generateTokenForUser,
   findUser,
   verifyToken,
-  changePasswordService
+  changePasswordService,
+  deleteAllUsersService
 } from "../services/userServices.mjs";
 
 const signUp = async (req, res) => {
@@ -154,4 +155,30 @@ const changePassword = async (req, res) => {
   }
 };
 
-export { signUp, getUser, signIn, checkToken, changePassword };
+const deleteAllUsers = async (req, res) => {
+  try {
+    const user = await deleteAllUsersService();
+    if (user)
+      res.status(200).json({
+        data: user,
+        success: true,
+        message: "All Users Deleted",
+      });
+    else
+      res.status(401).json({
+        message: "Wrong Credentials",
+        success: false,
+        data: null,
+      });
+  }
+  catch (e) {
+    logger.error(`Enable to call DB functions ${e}`);
+    res.status(500).json({
+      message: "Internal Server Error",
+      success: false,
+      data: null,
+    });
+  }
+}
+
+export { signUp, getUser, signIn, checkToken, changePassword, deleteAllUsers };
