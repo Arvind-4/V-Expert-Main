@@ -81,4 +81,33 @@ const verifyToken = async (token) => {
     return null;
   }
 };
-export { createUserService, findUser, generateTokenForUser, verifyToken };
+
+
+const changePasswordService = async (email, oldpassword, newpassword) => {
+  try {
+    const userCollection = await db.collection("users");
+    const emailProps = await userCollection.filter({ email });
+    if (emailProps.results.length === 0) return null;
+    const user = emailProps.results[0].props;
+    const validPassword = await bcrypt.compare(oldpassword, user.password);
+
+    if (!validPassword) return null;
+
+    const hashedPassword = await bcrypt.hash(newpassword, 8);
+    user.password = hashedPassword;
+
+    const newUser = {
+      id: user.id,
+      password: hashedPassword,
+      email: user.email,
+      name: user.name,
+    }
+    await userCollection.set(newUser.id, newUser);
+    return user;
+  } catch (e) {
+    console.log(e);
+    return null;
+  }
+}
+
+export { createUserService, findUser, generateTokenForUser, verifyToken, changePasswordService };
