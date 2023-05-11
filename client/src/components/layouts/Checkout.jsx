@@ -23,7 +23,6 @@ const Checkout = (props) => {
     });
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
-    console.log("from data", data);
     const newData = {
       ...data,
       status: "pending",
@@ -38,7 +37,6 @@ const Checkout = (props) => {
       body: JSON.stringify(newData),
     });
     const res = await response.json();
-    console.log("status", response.status);
     if (response.status === 201) {
       Alert("Booking Successful", "Your booking has been confirmed", "success");
       navigate("/", { replace: true });

@@ -10,6 +10,7 @@ import Admin from "./components/pages/admin/home/Admin";
 import Login from "./components/pages/admin/authenticate/Login";
 import Register from "./components/pages/admin/authenticate/Register";
 import Logout from "./components/pages/admin/authenticate/Logout";
+import ChangePassword from "./components/pages/admin/authenticate/ChangePassword";
 import Cart from "./components/pages/cart/Cart";
 import Checkout from "./components/layouts/Checkout";
 
@@ -28,6 +29,7 @@ function App() {
         <Route path={"/admin/login"} element={<Login />} />
         <Route path={"/admin/logout"} element={<Logout />} />
         <Route path={"/admin/register"} element={<Register />} />
+        <Route path={"/admin/change-password"} element={<ChangePassword />} />
         <Route path={"*"} element={<Error />} />
       </Routes>
       <Footer />

@@ -4,7 +4,6 @@ import { createRatingService } from "../services/ratingServices.mjs";
 const createRating = async (req, res) => {
   try {
     const ratingObject = await createRatingService(req.body);
-    console.log("ratingObject", ratingObject);
     if (ratingObject)
       res.status(201).json({
         success: true,
